@@ -16,12 +16,12 @@ int getIDField(int first, int last)
 
 int getFirst(int id)
 {
-    return id << 21 >> 28; 
+    return ((id & (0b1111 << 7)) >> 7) & 0b1111; 
 }
 
 int getLast(int id)
 {
-    return id << 27 >> 27; 
+    return id & 0b1111; //grab the last 4 bits
 }
 
 #endif
