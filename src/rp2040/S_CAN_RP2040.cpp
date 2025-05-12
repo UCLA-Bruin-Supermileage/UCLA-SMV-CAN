@@ -23,12 +23,10 @@ void CANBUS::begin()
 
 void CANBUS::setIDs(int id_field)
 {
-    first = id_field << 21 >> 28; //greab the first 4 bits
-    last = id_field << 27 >> 27; //grab the last 4 bits
+    first = ((id_field & (0b1111 << 7)) >> 7) & 0b1111; //grab the first 4 bits
+    last = id_field & 0b1111; //grab the last 4 bits
     strcpy(hardware, readHardware(first));
     strcpy(dataType, readDataType(first, last));
-    // hardware = readHardware(first);
-    // dataType = readDataType(first, last);
 }
 
 void CANBUS::looper()
